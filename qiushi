@@ -1,6 +1,7 @@
 # -*-coding:utf-8-*-
 import urllib2
 import urllib
+import re
 
 page=1
 url='http://qiushibaike.com/hot/page/'+str(page)
@@ -9,7 +10,12 @@ headers={'User-Agent':user_agent}
 try:
     request=urllib2.Request(url,headers=headers)
     response=urllib2.urlopen(request)
-    print response.read()
+#    print response.read()
+    content=response.read().decode('utf-8')
+    pattern=re.compile('<div class="author clearfix">.*?<h2>(.*?)</h2>.*?<div.*?span>(.*?)</span>(.*?)<div class="stats">.*?class="number">(.*?)</i>',re.S)
+    items=re.findall(pattern,content)
+    for item in items:
+        print item[0],item[1],item[3]
 except urllib2.URLError,e:
     if hasattr(e,'code'):
         print e.code
