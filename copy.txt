@@ -1,4 +1,4 @@
-__author__ = 'CQC'
+ï»¿__author__ = 'CQC'
 #-*- coding:utf-8 -*-
 
 import urllib
@@ -12,21 +12,21 @@ import subprocess
 
 class Login:
 
-    #³õÊ¼»¯
+    #åˆå§‹åŒ–
     def __init__(self):
-        #Ñ§ºÅÃÜÂë
+        #å­¦å·å¯†ç 
         self.username = '201200131012'
         self.password = 'XXXXXX'
-        #É½´óÎŞÏßSTUµÄIPÍø¶Î
+        #å±±å¤§æ— çº¿STUçš„IPç½‘æ®µ
         self.ip_pre = '211.87'
-        #µÇÂ¼Ê±³¤
+        #ç™»å½•æ—¶é•¿
         self.overtime = 720
-        #¼ì²â¼ä¸ôÊ±¼ä£¬µ¥Î»ÎªÃë
+        #æ£€æµ‹é—´éš”æ—¶é—´ï¼Œå•ä½ä¸ºç§’
         self.every = 10
 
-    #Ä£ÄâµÇÂ¼
+    #æ¨¡æ‹Ÿç™»å½•
     def login(self):
-        print self.getCurrentTime(), u"ÕıÔÚ³¢ÊÔÈÏÖ¤QLSC_STUÎŞÏßÍøÂç"
+        print self.getCurrentTime(), u"æ­£åœ¨å°è¯•è®¤è¯QLSC_STUæ— çº¿ç½‘ç»œ"
         ip = self.getIP()
         data = {
             "username": self.username,
@@ -40,7 +40,7 @@ class Login:
             "heartbeat": 240,
             "fastwebornot": False,
             "StartTime": self.getNowTime(),
-            #³ÖĞøÊ±¼ä£¬³¬¹ıÕâ¸öÊ±¼ä×Ô¶¯µôÏß£¬¿É½øĞĞÉèÖÃ
+            #æŒç»­æ—¶é—´ï¼Œè¶…è¿‡è¿™ä¸ªæ—¶é—´è‡ªåŠ¨æ‰çº¿ï¼Œå¯è¿›è¡Œè®¾ç½®
             "shkOvertime": self.overtime,
             "strOSName": "",
             "iAdptIndex": "",
@@ -62,7 +62,7 @@ class Login:
             "sHttpPrefix": "http://192.168.8.10",
             "title": "CAMS Portal"
         }
-        #ÏûÏ¢Í·
+        #æ¶ˆæ¯å¤´
         headers = {
             'User-Agent' : 'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36',
             'Host': '192.168.8.10',
@@ -77,27 +77,27 @@ class Login:
         self.getLoginResult(result)
 
 
-    #´òÓ¡µÇÂ¼½á¹û
+    #æ‰“å°ç™»å½•ç»“æœ
     def getLoginResult(self, result):
-        if u"ÓÃ»§ÉÏÏß³É¹¦" in result:
-            print self.getCurrentTime(),u"ÓÃ»§ÉÏÏß³É¹¦,ÔÚÏßÊ±³¤Îª",self.overtime/60,"·ÖÖÓ"
-        elif u"ÄúÒÑ¾­½¨Á¢ÁËÁ¬½Ó" in result:
-            print self.getCurrentTime(),u"ÄúÒÑ¾­½¨Á¢ÁËÁ¬½Ó,ÎŞĞèÖØ¸´µÇÂ½"
-        elif u"ÓÃ»§²»´æÔÚ" in result:
-            print self.getCurrentTime(),u"ÓÃ»§²»´æÔÚ£¬Çë¼ì²éÑ§ºÅÊÇ·ñÕıÈ·"
-        elif u"ÓÃ»§ÃÜÂë´íÎó" in result:
+        if u"ç”¨æˆ·ä¸Šçº¿æˆåŠŸ" in result:
+            print self.getCurrentTime(),u"ç”¨æˆ·ä¸Šçº¿æˆåŠŸ,åœ¨çº¿æ—¶é•¿ä¸º",self.overtime/60,"åˆ†é’Ÿ"
+        elif u"æ‚¨å·²ç»å»ºç«‹äº†è¿æ¥" in result:
+            print self.getCurrentTime(),u"æ‚¨å·²ç»å»ºç«‹äº†è¿æ¥,æ— éœ€é‡å¤ç™»é™†"
+        elif u"ç”¨æˆ·ä¸å­˜åœ¨" in result:
+            print self.getCurrentTime(),u"ç”¨æˆ·ä¸å­˜åœ¨ï¼Œè¯·æ£€æŸ¥å­¦å·æ˜¯å¦æ­£ç¡®"
+        elif u"ç”¨æˆ·å¯†ç é”™è¯¯" in result:
             pattern = re.compile('<td class="tWhite">.*?2553:(.*?)</b>.*?</td>', re.S)
             res = re.search(pattern, result)
             if res:
-                print self.getCurrentTime(),res.group(1),u"ÇëÖØĞÂĞŞ¸ÄÃÜÂë"
+                print self.getCurrentTime(),res.group(1),u"è¯·é‡æ–°ä¿®æ”¹å¯†ç "
         else:
-            print self.getCurrentTime(),u"Î´Öª´íÎó£¬Çë¼ì²éÑ§ºÅÃÜÂëÊÇ·ñÕıÈ·"
+            print self.getCurrentTime(),u"æœªçŸ¥é”™è¯¯ï¼Œè¯·æ£€æŸ¥å­¦å·å¯†ç æ˜¯å¦æ­£ç¡®"
 
-    #»ñÈ¡µ±Ç°Ê±¼ä´Á£¬13Î»
+    #è·å–å½“å‰æ—¶é—´æˆ³ï¼Œ13ä½
     def getNowTime(self):
         return str(int(time.time()))+"000"
 
-    #»ñÈ¡±¾»úÎŞÏßIP
+    #è·å–æœ¬æœºæ— çº¿IP
     def getIP(self):
         local_iP = socket.gethostbyname(socket.gethostname())
         if self.ip_pre in str(local_iP):
@@ -113,7 +113,7 @@ class Login:
                 if self.ip_pre in ip_list:
                     return ip_list
 
-    #ÅĞ¶Ïµ±Ç°ÊÇ·ñ¿ÉÒÔÁªÍø
+    #åˆ¤æ–­å½“å‰æ˜¯å¦å¯ä»¥è”ç½‘
     def canConnect(self):
         fnull = open(os.devnull, 'w')
         result = subprocess.call('ping www.baidu.com', shell = True, stdout = fnull, stderr = fnull)
@@ -123,31 +123,31 @@ class Login:
         else:
             return True
 
-    #»ñÈ¡µ±Ç°Ê±¼ä
+    #è·å–å½“å‰æ—¶é—´
     def getCurrentTime(self):
         return time.strftime('[%Y-%m-%d %H:%M:%S]',time.localtime(time.time()))
 
-    #Ö÷º¯Êı
+    #ä¸»å‡½æ•°
     def main(self):
-        print self.getCurrentTime(), u"ÄúºÃ£¬»¶Ó­Ê¹ÓÃÄ£ÄâµÇÂ½ÏµÍ³"
+        print self.getCurrentTime(), u"æ‚¨å¥½ï¼Œæ¬¢è¿ä½¿ç”¨æ¨¡æ‹Ÿç™»é™†ç³»ç»Ÿ"
         while True:
             nowIP = self.getIP()
             if not nowIP:
-                print self.getCurrentTime(), u"Çë¼ì²éÊÇ·ñÕı³£Á¬½ÓQLSC_STUÎŞÏßÍøÂç"
+                print self.getCurrentTime(), u"è¯·æ£€æŸ¥æ˜¯å¦æ­£å¸¸è¿æ¥QLSC_STUæ— çº¿ç½‘ç»œ"
             else:
-                print self.getCurrentTime(),u"³É¹¦Á¬½ÓÁËQLSC_STUÍøÂç,±¾»úIPÎª",nowIP
+                print self.getCurrentTime(),u"æˆåŠŸè¿æ¥äº†QLSC_STUç½‘ç»œ,æœ¬æœºIPä¸º",nowIP
                 self.login()
                 while True:
                     can_connect = self.canConnect()
                     if not can_connect:
                         nowIP = self.getIP()
                         if not nowIP:
-                            print self.getCurrentTime(), u"µ±Ç°ÒÑ¾­µôÏß£¬ÇëÈ·±£Á¬½ÓÉÏÁËQLSC_STUÍøÂç"
+                            print self.getCurrentTime(), u"å½“å‰å·²ç»æ‰çº¿ï¼Œè¯·ç¡®ä¿è¿æ¥ä¸Šäº†QLSC_STUç½‘ç»œ"
                         else:
-                            print self.getCurrentTime(), u"µ±Ç°ÒÑ¾­µôÏß£¬ÕıÔÚ³¢ÊÔÖØĞÂÁ¬½Ó"
+                            print self.getCurrentTime(), u"å½“å‰å·²ç»æ‰çº¿ï¼Œæ­£åœ¨å°è¯•é‡æ–°è¿æ¥"
                             self.login()
                     else:
-                        print self.getCurrentTime(), u"µ±Ç°ÍøÂçÁ¬½ÓÕı³£"
+                        print self.getCurrentTime(), u"å½“å‰ç½‘ç»œè¿æ¥æ­£å¸¸"
                     time.sleep(self.every)
             time.sleep(self.every)
 
