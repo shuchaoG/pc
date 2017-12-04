@@ -137,13 +137,13 @@ class Spider:
     #传入起始和终止页码
     def savePagesInfo(self,start,end):
         for i in range(start,end+1):
-            print u"正在查找",i,u"个地方的MM"
+            print u"正在查找",i,u"个MM"
             self.savePageInfo(i)
  
  
 #传入起始和终止页码2和10
 spider = Spider()
-spider.savePagesInfo(3,10)
+spider.savePagesInfo(2,10)
 
 
 
